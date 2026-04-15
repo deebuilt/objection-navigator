@@ -32,7 +32,9 @@ interface IndexPageProps {
 export default function IndexPage({ onToggleTheme, isDark }: IndexPageProps) {
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [context, setContext] = useState<ContextType>('cold-call');
+  const [context, setContext] = useState<ContextType>(() => {
+    return (localStorage.getItem('objection-context') as ContextType) || 'cold-call';
+  });
   const [drawerOpen, setDrawerOpen] = useState(false);
   const responsesRef = useRef<HTMLDivElement>(null);
   const { favorites, isFavorite, toggleFavorite, clearAll } = useFavorites();
@@ -62,8 +64,14 @@ export default function IndexPage({ onToggleTheme, isDark }: IndexPageProps) {
     setTimeout(() => responsesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   };
 
+  const handleContextChange = (val: string) => {
+    const newContext = val as ContextType;
+    setContext(newContext);
+    localStorage.setItem('objection-context', newContext);
+  };
+
   const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => message.success('Copied to clipboard'));
+    navigator.clipboard.writeText(text).then(() => message.success('Copied — say it like this'));
   };
 
   return (
