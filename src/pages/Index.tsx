@@ -178,11 +178,14 @@ export default function IndexPage({ onToggleTheme, isDark }: IndexPageProps) {
               Say this:
             </Text>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {responses.map(r => (
+              {responses.map((r, i) => (
                 <Card
                   key={r.id}
                   size="small"
-                  style={{ borderRadius: 14 }}
+                  style={{
+                    borderRadius: 14,
+                    animation: `fadeSlideIn 0.3s ease ${i * 0.06}s both`,
+                  }}
                   styles={{ body: { padding: '16px 18px' } }}
                 >
                   <div style={{ marginBottom: 10 }}>
