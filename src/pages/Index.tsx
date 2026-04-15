@@ -11,6 +11,7 @@ import {
   DeleteOutlined,
   BulbOutlined,
 } from '@ant-design/icons';
+import faviconImg from '../assets/favicon.png';
 import { objections, CONTEXTS, CATEGORIES, TACTICS, TONE_INFO, ContextType, CategoryType } from '../data/objections';
 import { useFavorites } from '../hooks/useFavorites';
 
@@ -120,7 +121,7 @@ export default function IndexPage({ onToggleTheme, isDark }: IndexPageProps) {
         borderBottom: `1px solid ${isDark ? '#2E2C38' : '#E8E6E1'}`,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <img src="/favicon.png" alt="Objection Navigator" width={26} height={26} />
+          <img src={faviconImg} alt="Objection Navigator" width={28} height={28} />
           <span style={{ fontSize: 17, fontWeight: 700, color: isDark ? '#E8E6EF' : '#2D2A33' }}>
             Objection Navigator
           </span>
