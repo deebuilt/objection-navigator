@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => ({
         navigateFallbackDenylist: [/^\/~oauth/],
       },
       manifest: {
-        name: "Objection Helper",
+        name: "Objection Navigator",
         short_name: "Objections",
         description: "Fast responses for awkward client objections.",
         display: "standalone",
