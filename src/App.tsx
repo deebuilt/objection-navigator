@@ -14,7 +14,7 @@ const App = () => {
     <ConfigProvider theme={isDark ? darkTheme : lightTheme}>
       <div
         style={{
-          background: isDark ? '#141318' : '#F8F7F4',
+          background: isDark ? '#000' : '#f5f5f5',
           minHeight: '100vh',
           transition: 'background 0.3s',
         }}

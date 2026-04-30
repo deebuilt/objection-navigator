@@ -11,10 +11,9 @@ import {
   DeleteOutlined,
   BulbOutlined,
 } from '@ant-design/icons';
-import faviconImg from '../assets/favicon.png';
 import { objections, CONTEXTS, CATEGORIES, TACTICS, TONE_INFO, ContextType, CategoryType } from '../data/objections';
 import { useFavorites } from '../hooks/useFavorites';
-import { ShareAppButton } from '@/components/opsette-share';
+import { OpsetteHeader } from '@/components/opsette-header';
 
 const { Text, Paragraph } = Typography;
 
@@ -99,60 +98,45 @@ export default function IndexPage({ onToggleTheme, isDark }: IndexPageProps) {
       : '0 2px 8px rgba(0,0,0,0.06)',
   };
 
+  const headerExtras = (
+    <>
+      <Badge count={favorites.length} size="small" offset={[-4, 4]}>
+        <Button
+          shape="circle"
+          icon={<StarOutlined />}
+          onClick={() => setDrawerOpen(true)}
+          size="middle"
+        />
+      </Badge>
+      <Button
+        shape="circle"
+        icon={isDark ? <SunOutlined /> : <MoonOutlined />}
+        onClick={onToggleTheme}
+        size="middle"
+      />
+    </>
+  );
+
   return (
     <div style={{
       minHeight: '100dvh',
       display: 'flex',
       flexDirection: 'column',
-      maxWidth: 480,
-      margin: '0 auto',
-      paddingBottom: 40,
     }}>
-      {/* Header */}
-      <header style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '10px 16px',
-        position: 'sticky',
-        top: 0,
-        zIndex: 10,
-        backgroundColor: isDark ? 'rgba(20, 19, 24, 0.95)' : 'rgba(248, 247, 244, 0.95)',
-        backdropFilter: 'blur(8px)',
-        borderBottom: `1px solid ${isDark ? '#2E2C38' : '#E8E6E1'}`,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <img src={faviconImg} alt="Objection Navigator" width={28} height={28} />
-          <span style={{ fontSize: 17, fontWeight: 700, color: isDark ? '#E8E6EF' : '#2D2A33' }}>
-            Objection Navigator
-          </span>
-        </div>
-        <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-          <Badge count={favorites.length} size="small" offset={[-4, 4]}>
-            <Button
-              shape="circle"
-              icon={<StarOutlined />}
-              onClick={() => setDrawerOpen(true)}
-              size="middle"
-            />
-          </Badge>
-          <Button
-            shape="circle"
-            icon={isDark ? <SunOutlined /> : <MoonOutlined />}
-            onClick={onToggleTheme}
-            size="middle"
-          />
-          <ShareAppButton size={32} />
-        </div>
-      </header>
+      <OpsetteHeader theme={isDark ? 'dark' : 'light'} rightExtra={headerExtras} />
 
       {/* Main content */}
-      <div style={{ flex: 1, padding: '16px 16px 0', display: 'flex', flexDirection: 'column', gap: 14 }}>
-
-        <Text type="secondary" style={{ fontSize: 14, textAlign: 'center', display: 'block' }}>
-          Real tactics for real objections — keep them on the line.
-        </Text>
-
+      <div style={{
+        flex: 1,
+        padding: '16px 16px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 14,
+        maxWidth: 480,
+        width: '100%',
+        margin: '0 auto',
+        paddingBottom: 40,
+      }}>
         {/* Search */}
         <Input
           prefix={<SearchOutlined />}
